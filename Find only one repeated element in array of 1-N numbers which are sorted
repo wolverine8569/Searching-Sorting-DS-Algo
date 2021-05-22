@@ -1,0 +1,22 @@
+pair<int, int> findRepeating(int *arr, int n){
+        pair<int,int>pr;
+        int start=0,end=n-1,pos=-1;
+        while(start<=end){
+            int mid=(start+end)/2;
+            if(arr[mid]-arr[0]==mid){
+                pos=arr[mid];
+                start=mid+1;
+            }
+            else
+            end=mid-1;
+        }
+        if(arr[n-1]==n)
+        {
+            pr.first=-1;
+            pr.second=-1;
+        }else{
+        pr.first=pos;
+        pr.second=(n-arr[n-1]+1);
+        }
+        return pr;
+    }
