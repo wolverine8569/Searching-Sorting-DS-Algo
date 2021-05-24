@@ -1,0 +1,21 @@
+int findNumberOfTriangles(int arr[], int n)
+    {
+        // code here
+        int ans=0;
+        sort(arr,arr+n);
+        for(int i=n-1;i>=2;i--){
+            int b=i-1;
+            int a=0;
+            while(a<b){
+                if(arr[a]+arr[b]>arr[i])
+                {
+                    ans+=(b-a);
+                    b--;
+                }
+                else
+                a++;
+            }
+            
+        }
+        return ans;
+    }
