@@ -1,0 +1,27 @@
+bool check(int num,int n){
+        int ans=0,count=5;
+        while(((int)num/count)>0)
+        {
+            ans+=(num/count);
+            count*=5;
+        }
+        return (ans>=n);
+    }
+        int findNum(int n)
+        {
+        //complete the function here
+        if(n==1)
+        return 5;
+        int start=0,end=5*n,ans=0;
+        while(start<=end){
+            int mid=(start+end)/2;
+            if(check(mid,n))
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else
+            start=mid+1;
+        }
+        return ans;
+        }
