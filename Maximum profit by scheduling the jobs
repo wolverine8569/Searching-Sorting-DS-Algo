@@ -1,0 +1,45 @@
+struct job{
+        int etime,stime,profit;
+    };
+    int isM(vector<job>& arr,int n,job k){
+        int start=0,end=n-1;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(arr[mid].etime<=k.stime)
+            {
+                if(arr[mid+1].etime<=k.stime)
+                start=mid+1;
+                else
+                    return mid;
+            }
+            else{
+                end=mid-1;
+            }
+        }
+        return -1;
+        
+    }
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+        int n=startTime.size();
+        vector<job>arr(n);
+        for(int i=0;i<n;i++){
+            arr[i].etime=endTime[i];
+            arr[i].stime=startTime[i];
+            arr[i].profit=profit[i];
+        }
+        sort(arr.begin(),arr.end(),[&](job a,job b){
+            return a.etime<b.etime;
+        });
+        int dp[n];
+        dp[0]=arr[0].profit;
+        for(int i=1;i<n;i++){
+            int x=isM(arr,i,arr[i]);
+           // cout<<x<<'\n';
+            if(x!=-1){
+                dp[i]=max(dp[i-1],dp[x]+arr[i].profit);
+            }
+            else
+                dp[i]=max(dp[i-1],arr[i].profit);
+        }
+        return dp[n-1];
+    }
