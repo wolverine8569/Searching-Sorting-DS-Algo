@@ -1,0 +1,43 @@
+//we have to move cows into k shell such that minimum difference b/w them can be maximize
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+bool check(ll arr[],ll mid,ll n,ll k){
+    ll prev=arr[0],count=1;
+    for(int i=1;i<n;i++){
+        if((arr[i]-prev)>=mid)
+        {
+            count++;
+            prev=arr[i];
+        }
+      //  cout<<count<<" ";
+    }
+   // cout<<'\n';
+    return count>=k;
+}
+
+int main() {
+    ll t;cin>>t;
+    while(t--){
+        ll n,k,ans=0;
+        cin>>n>>k;
+        ll arr[n];
+        for(int i=0;i<n;i++)
+        cin>>arr[i];
+        sort(arr,arr+n);
+        ll max1=*max_element(arr,arr+n);
+        ll min1=*min_element(arr,arr+n);
+        ll start=0,end=max1-min1;
+        while(start<=end){
+            ll mid=(start+end)/2;
+            if(check(arr,mid,n,k)){
+                ans=max(ans,mid);
+                start=mid+1;
+            }
+            else
+            end=mid-1;
+        }
+        cout<<ans<<'\n';
+    }
+}
