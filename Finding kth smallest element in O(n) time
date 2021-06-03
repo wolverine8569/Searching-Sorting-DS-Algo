@@ -1,0 +1,27 @@
+int partition(int arr[],int l,int r){
+    int pivot=r;
+    int i=l,j=l;
+    while(i<=r){
+        if(arr[i]>arr[r])
+        i++;
+        else if(arr[i]<=arr[r])
+        {
+            swap(arr[i],arr[j]);
+            j++;
+            i++;
+        }
+    }
+    return j-1;
+    
+}
+int kthSmallest(int arr[], int l, int r, int k)
+    {
+        int mid=partition(arr,l,r);
+        if(mid>(k-1))
+        return kthSmallest(arr,l,mid-1,k);
+        else if(mid<(k-1))
+        return kthSmallest(arr,mid+1,r,k);
+        else
+        return arr[mid];
+    }
+};
