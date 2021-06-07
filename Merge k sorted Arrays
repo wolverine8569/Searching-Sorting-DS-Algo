@@ -1,0 +1,25 @@
+    struct no{
+        int num,vno,ind;
+    };
+    struct myCmp{
+        bool operator()(no &t1,no &t2){
+        return t1.num>t2.num;}
+    };
+    vector<int> mergeKArrays(vector<vector<int>> arr, int K)
+    {
+        vector<int>ans;
+        priority_queue <no, vector<no>, myCmp > pq;
+        for(int i=0;i<K;i++)
+        pq.push({arr[i][0],i,0});
+        while(!pq.empty()){
+            no ele=pq.top();
+            pq.pop();
+            int x=ele.num;
+            //cout<<x<<" "<<ele.vno<<" "<<ele.ind<<'\n';
+            ans.push_back(x);
+            if(K>((ele.ind)+1)){
+            pq.push({arr[ele.vno][(ele.ind)+1],ele.vno,(ele.ind)+1});
+            }
+        }
+        return ans;
+    }
